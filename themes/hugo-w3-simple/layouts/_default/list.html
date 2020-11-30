@@ -1,13 +1,9 @@
 {{ define "main" -}}
  <div class="w3-content w3-card-4" >
-{{ if not .IsHome }}
-    <h1 class="w3-center">{{ .Title | markdownify }}</h1>
-    
-   
+{{if not .IsHome }}
+<h1 class="w3-center">{{ .Title | markdownify }}</h1>
 {{ end }}
-{{ $paginator := .Paginate (where .RegularPages "Section" "!=" "") }}
-
-
+{{ $paginator := .Paginate (where .Data.Pages "Section" "!=" "") }}
 
 {{ if  .Site.Params.allliststyle }}
   <script src="{{ "/js/w3.js" | relURL }}"></script>
@@ -89,12 +85,12 @@
         {{ end }}
    
       <header class="w3-container wraptext w3-text-indigo">
-        <h4><a href="{{ .Permalink }}">{{ .Title | markdownify }}</a></h4>
+        <h4><a href="{{ .URL }}">{{ .Title | markdownify }}</a></h4>
         
                
       </header>
 
-
+<<<<<<< HEAD
     <div class="w3-container wraptext w3-white">
       <code> {{ .Date.Format "2006/01/02" }} </code>
       
@@ -108,23 +104,24 @@
       </p>
 
     </div>
-      
-  <div class='w3-container wraptextw3-white'>
+=======
+      <div class="w3-container wraptext w3-white">
         <code> {{ .Date.Format "2006/01/02" }} </code>
+              
+            
+        {{ if gt (len .Summary) 200 }}
+
+    
+        <p>{{substr .Summary 0 200 }}...</p>
+    
+    
+      {{ end }}
         
-        
-        {{ if gt (len .summary) 200 }}
-        
-        
-        <p>{{substr .summary 0 200 }}...</p>
-        
-        
-        
-    </div>
-     
+      </div>
+>>>>>>> dev
 
       <footer >
-        <a href="{{ .Permalink }}"><button class="w3-button w3-blue w3-block w3-hover-green">{{ T "readMore" }}</button></a>
+        <a href="{{ .URL }}"><button class="w3-button w3-blue w3-block w3-hover-green">{{ T "readMore" }}</button></a>
       </footer>
     </div>
     </div>
@@ -145,7 +142,7 @@
   {{ range $paginator.Pages }}
     <li>
       <span class="date">{{ .Date.Format "2006/01/02" }}</span> &nbsp; 
-      <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
+      <a href="{{ .URL }}">{{ .Title | markdownify }}</a>
     </li>
   {{ end }} 
   {{ end }}
@@ -170,4 +167,3 @@
   {{- end }}
 </div>
 {{ end }}
-
