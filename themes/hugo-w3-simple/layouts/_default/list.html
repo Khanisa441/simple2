@@ -108,7 +108,19 @@
       </p>
 
     </div>
-
+      
+  <div class='w3-container wraptextw3-white'>
+        <code> {{ .Date.Format "2006/01/02" }} </code>
+        
+        
+        {{ if gt (len .summary) 200 }}
+        
+        
+        <p>{{substr .summary 0 200 }}...</p>
+        
+        
+        
+    </div>
      
 
       <footer >
